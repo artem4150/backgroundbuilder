@@ -8,9 +8,11 @@ export function EditorHeader({ editor }: { editor: EditorController }) {
         <span className="mark">◒</span> состав
         <span className="subtitle">Конструктор иллюстраций</span>
       </div>
-      <button className="primary" disabled={exporting || busy} onClick={exportSvg}>
-        {exporting ? "Подготовка…" : "Скачать SVG"} <span>↗</span>
-      </button>
+      <div className="header-actions">
+        <button className="primary" disabled={exporting || busy} onClick={exportSvg}>
+          {exporting ? "Подготовка…" : "Скачать SVG"} <span>↗</span>
+        </button>
+      </div>
     </header>
   );
 }

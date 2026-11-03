@@ -1,3 +1,4 @@
+import { HistoryPanel } from "./history-panel";
 import type { EditorController } from "../hooks/use-editor";
 import { schemes, labels } from "../lib/library";
 export function InspectorPanel({ editor }: { editor: EditorController }) {
@@ -177,6 +178,7 @@ export function InspectorPanel({ editor }: { editor: EditorController }) {
           </div>
         ))}
       </section>
+      <HistoryPanel editor={editor} />
     </aside>
   );
 }

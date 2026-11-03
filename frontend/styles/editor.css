@@ -766,3 +766,230 @@ h3 {
   display: flex;
   justify-content: space-between;
 }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.history-dialog {
+  width: min(700px, calc(100vw - 32px));
+  max-height: 85dvh;
+  overflow: auto;
+  border: 1px solid #e4dfef;
+  border-radius: 16px;
+  padding: 24px;
+  color: #25252d;
+  box-shadow: 0 24px 80px #211a3526;
+}
+.history-dialog::backdrop {
+  background: #28233355;
+  backdrop-filter: blur(3px);
+}
+.history-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+.history-title p,
+.history-note {
+  font-size: 12px;
+  color: #88828f;
+}
+.history-title button {
+  font-size: 26px;
+  padding: 0 8px;
+}
+.history-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+.history-entry {
+  display: flex;
+  gap: 16px;
+  text-align: left;
+  border: 1px solid #e9e5ef;
+  border-radius: 10px;
+  padding: 12px;
+  align-items: center;
+}
+.history-entry svg {
+  width: 110px;
+  height: 90px;
+  flex-shrink: 0;
+  background: #f3f1f8;
+}
+.history-entry > span {
+  min-width: 0;
+}
+.history-entry strong {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+.history-entry small {
+  display: block;
+  font-size: 11px;
+  color: #88828f;
+  margin: 6px 0;
+}
+.history-entry span span {
+  color: #7864d7;
+  font-size: 11px;
+}
+.history-note {
+  margin-bottom: 0;
+}
+.history-empty {
+  padding: 24px 0;
+  color: #88828f;
+  font-size: 13px;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+}
+.right > section {
+  flex-shrink: 0;
+}
+.right > .history-access {
+  margin-top: auto;
+  border-top: 1px solid #eeeef2;
+  border-bottom: 0;
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  z-index: 2;
+  padding: 16px;
+}
+.right > .history-panel {
+  flex: 1 0 140px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #eeeef2;
+  border-bottom: 0;
+  padding: 14px;
+  margin-top: 0;
+}
+.history-panel h3 {
+  margin-bottom: 10px;
+}
+.history-panel .history-list {
+  flex: 1;
+  min-height: 0;
+  max-height: 360px;
+  overflow-y: auto;
+  margin-top: 0;
+  gap: 7px;
+  scrollbar-width: thin;
+}
+.history-panel .history-entry {
+  gap: 9px;
+  padding: 6px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+.history-panel .history-entry svg {
+  width: 70px;
+  height: 56px;
+}
+.history-panel .history-entry strong {
+  font-size: 11px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.history-panel .history-entry small {
+  font-size: 9px;
+  margin: 4px 0 0;
+}
+.history-panel .history-note {
+  font-size: 9px;
+  line-height: 1.5;
+  margin: 10px 0 0;
+}
+.history-panel .history-empty {
+  padding: 0;
+  margin: 0;
+}
+.history-panel .history-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.history-card {
+  position: relative;
+  flex: none;
+  min-width: 0;
+  border: 1px solid #e5e0ef;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #fff;
+}
+.history-panel .history-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+}
+.history-panel .history-entry:hover {
+  background: #f7f5fc;
+}
+.history-panel .history-entry svg {
+  display: block;
+  width: 100%;
+  height: 130px;
+  background: #f3f0fa;
+  object-fit: contain;
+  padding: 7px;
+}
+.history-panel .history-entry > span {
+  padding: 9px 34px 9px 10px;
+}
+.history-panel .history-entry strong {
+  font-size: 11px;
+  line-height: 1.45;
+}
+.history-panel .history-entry small {
+  font-size: 10px;
+  margin-top: 4px;
+}
+.history-delete {
+  position: absolute;
+  right: 5px;
+  bottom: 10px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  color: #938b9f;
+}
+.history-delete:hover {
+  background: #fbecee;
+  color: #aa4652;
+}
+.history-delete svg {
+  width: 17px;
+  height: 17px;
+}
+.history-delete:disabled {
+  opacity: 0.4;
+}
+.right > .history-panel {
+  min-height: 230px;
+  flex: 1 0 230px;
+}
+.history-panel .history-list {
+  min-height: 150px;
+}

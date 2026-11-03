@@ -1,10 +1,11 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { catalog, schemes } from "../lib/library";
 import type { Item } from "../lib/types";
 import { scaleScene } from "../lib/scene";
 import { requestComposition } from "../lib/api";
 import { downloadSvg } from "../lib/export-svg";
+import { loadHistory, saveHistory, deleteHistory, type HistoryEntry } from "../lib/history";
 export function useEditor() {
   const [items, setItems] = useState<Item[]>([
     { id: 1, object: "book", x: 150, y: 200, rotation: 0, role: "background" },
@@ -23,6 +24,73 @@ export function useEditor() {
   const [backgroundObjects, setBackgroundObjects] = useState(true);
   const [exporting, setExporting] = useState(false);
   const [groupScale, setGroupScale] = useState(100);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const [historyError, setHistoryError] = useState("");
+  const [deletingHistory, setDeletingHistory] = useState<string | null>(null);
+  async function removeHistory(id: string) {
+    if (deletingHistory) return;
+    setDeletingHistory(id);
+    try {
+      await deleteHistory(id);
+      setHistory((all) => all.filter((entry) => entry.id !== id));
+      setStatus("Запись удалена из истории");
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Не удалось удалить запись");
+    } finally {
+      setDeletingHistory(null);
+    }
+  }
+  async function reloadHistory() {
+    setHistoryLoading(true);
+    setHistoryError("");
+    try {
+      setHistory(await loadHistory());
+    } catch (e) {
+      setHistoryError(e instanceof Error ? e.message : "История недоступна");
+    } finally {
+      setHistoryLoading(false);
+    }
+  }
+  useEffect(() => {
+    let cancelled = false;
+    setHistoryLoading(true);
+    loadHistory()
+      .then((entries) => {
+        if (!cancelled)
+          setHistory((current) =>
+            [
+              ...current,
+              ...entries.filter((entry) => !current.some((existing) => existing.id === entry.id)),
+            ].slice(0, 30),
+          );
+      })
+      .catch((error) => {
+        if (!cancelled)
+          setHistoryError(error instanceof Error ? error.message : "История недоступна");
+      })
+      .finally(() => {
+        if (!cancelled) setHistoryLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  function restoreHistory(entry: HistoryEntry) {
+    const scene = entry.snapshot;
+    setItems(scene.items.map((i) => ({ ...i })));
+    seq.current = Math.max(...scene.items.map((i) => i.id)) + 1;
+    setQuery(scene.query);
+    setTab(scene.mode);
+    setFormat(scene.format);
+    setDetail(scene.detail);
+    setScheme(scene.scheme);
+    setBackgroundObjects(scene.backgroundObjects);
+    setCommonScale(scene.commonScale);
+    setGroupScale(100);
+    select(null);
+    setStatus("Композиция восстановлена из истории");
+  }
   const svg = useRef<SVGSVGElement>(null);
   const drag = useRef<{ id: number; x: number; y: number; ox: number; oy: number } | null>(null);
   const seq = useRef(3);
@@ -121,11 +189,30 @@ export function useEditor() {
         background_objects: backgroundObjects,
         seed: Math.floor(Math.random() * 1000000),
       });
-      setItems(result.items.map((i: Omit<Item, "id">) => ({ ...i, id: seq.current++ })));
+      const generatedItems = result.items.map((i: Omit<Item, "id">) => ({
+        ...i,
+        id: seq.current++,
+      }));
+      setItems(generatedItems);
       setCommonScale(result.commonScale);
       setGroupScale(100);
       select(null);
       setStatus(result.notice || "Композиция собрана");
+      try {
+        const entry = await saveHistory({
+          query,
+          mode: tab,
+          format,
+          detail,
+          scheme,
+          backgroundObjects,
+          commonScale: result.commonScale,
+          items: generatedItems,
+        });
+        setHistory((all) => [entry, ...all].slice(0, 30));
+      } catch (e) {
+        setStatus(e instanceof Error ? e.message : "Не удалось сохранить историю");
+      }
     } catch (e) {
       setStatus(e instanceof Error ? e.message : "Сервис недоступен");
     } finally {
@@ -171,6 +258,14 @@ export function useEditor() {
   }
 
   return {
+    deletingHistory,
+    removeHistory,
+    history,
+    historyLoading,
+    historyError,
+    reloadHistory,
+    restoreHistory,
+
     items,
     setItems,
     selected,

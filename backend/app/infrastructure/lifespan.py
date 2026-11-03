@@ -7,11 +7,13 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.infrastructure.gemini import create_gemini_client
+from app.infrastructure.history import create_history_repository
 from app.infrastructure.storage import initialize_storage
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    app.state.history = await asyncio.to_thread(create_history_repository)
     app.state.s3 = None
     app.state.ai = None
     app.state.ai_slots = asyncio.Semaphore(1)
