@@ -1,0 +1,11 @@
+**/node_modules
+**/.next
+**/.venv
+.git
+.env
+Тестовое _ иллюстрации*
+audit
+*.zip
+archive
+**/.pytest_cache
+**/tests

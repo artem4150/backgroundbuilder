@@ -1,0 +1,50 @@
+[
+  {
+    "id": "purple",
+    "name": "Лаванда",
+    "colors": ["#D7CDF5", "#AA9BF0", "#7864D7", "#F9ECB0", "#F9A3AA", "#FFE3E1"],
+    "roles": {
+      "backgroundBase": "#D7CDF5",
+      "backgroundMid": "#AA9BF0",
+      "backgroundDark": "#7864D7",
+      "objectLight": "#F9ECB0",
+      "objectAccent": "#F9A3AA",
+      "objectSoft": "#FFE3E1"
+    },
+    "backgroundColors": ["#D7CDF5", "#AA9BF0", "#7864D7"],
+    "objectColors": ["#F9ECB0", "#F9A3AA", "#FFE3E1"],
+    "neutralColors": ["#181817", "white", "black"]
+  },
+  {
+    "id": "peach",
+    "name": "Персик",
+    "colors": ["#FDD7B9", "#FAC896", "#D27532", "#F9ECB0", "#80DADA", "#BEEBEB"],
+    "roles": {
+      "backgroundBase": "#FDD7B9",
+      "backgroundMid": "#FAC896",
+      "backgroundDark": "#D27532",
+      "objectLight": "#F9ECB0",
+      "objectAccent": "#80DADA",
+      "objectSoft": "#BEEBEB"
+    },
+    "backgroundColors": ["#FDD7B9", "#FAC896", "#D27532"],
+    "objectColors": ["#F9ECB0", "#80DADA", "#BEEBEB"],
+    "neutralColors": ["#181817", "white", "black"]
+  },
+  {
+    "id": "turquoise",
+    "name": "Бирюза",
+    "colors": ["#BEEBEB", "#80DADA", "#5ABEBE", "#FFD4F2", "#6D7BFC", "#B6C6FE"],
+    "roles": {
+      "backgroundBase": "#BEEBEB",
+      "backgroundMid": "#80DADA",
+      "backgroundDark": "#5ABEBE",
+      "objectLight": "#FFD4F2",
+      "objectAccent": "#6D7BFC",
+      "objectSoft": "#B6C6FE"
+    },
+    "backgroundColors": ["#BEEBEB", "#80DADA", "#5ABEBE"],
+    "objectColors": ["#FFD4F2", "#6D7BFC", "#B6C6FE"],
+    "neutralColors": ["#181817", "white", "black"]
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "name": "composition-studio",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write app features styles shared",
+    "format:check": "prettier --check app features styles shared",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "check": "npm run format:check && npm run typecheck && npm run test"
+  },
+  "dependencies": {
+    "next": "16.4.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2"
+  },
+  "type": "module"
+}

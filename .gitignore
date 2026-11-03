@@ -1,0 +1,55 @@
+# Secrets and local environment
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+certificates/
+certbot/
+
+# JavaScript dependencies and build output
+**/node_modules/
+**/.next/
+**/out/
+**/dist/
+**/coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Python environments, caches and build output
+**/.venv/
+**/venv/
+**/__pycache__/
+*.py[cod]
+**/.pytest_cache/
+**/.ruff_cache/
+**/.mypy_cache/
+**/.coverage
+**/htmlcov/
+**/*.egg-info/
+
+# Local data and diagnostics
+*.log
+*.log.*
+*.sqlite
+*.sqlite3
+*.db
+*.zip
+archive/
+audit/
+backups/
+
+# Editors and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
